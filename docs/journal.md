@@ -29,8 +29,8 @@ I also learned why `.o` (object) files are needed and how the compilation proces
 
 I explored the difference between:
 
-- Compile-time errors
-- Linker errors
+- Compile-time errors -> missing declaration gives a compile error
+- Linker errors -> Happens when the Linker is not able to found the actual contents which were promised (missing definition gives linker error)
 
 and understood at which stage each type of error occurs.
 
