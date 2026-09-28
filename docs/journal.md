@@ -35,3 +35,20 @@ I explored the difference between:
 and understood at which stage each type of error occurs.
 
 Another important thing I learned was why multi-file projects exist and why large projects are split into multiple source and header files instead of keeping everything in a single file.
+
+
+# Day 2 (28/09/2026)
+
+Today I learned about RAII, one of the most important concepts in C++.
+
+I started with constructors and destructors. Constructors run automatically when an object is created and destructors run automatically when an object goes out of scope. I also learned that objects are destroyed in the reverse order of their creation.
+
+To understand this better, I created a `Noisy` (learn/day02_raii.cpp) class which printed messages when objects were created and destroyed. I tested nested scopes and early returns and saw that destructors still run even when a function returns early.
+
+I then learned the difference between stack and heap allocation. Objects created normally are destroyed automatically when they go out of scope, but objects created with `new` are not destroyed automatically and can cause memory/resource leaks if `delete` is forgotten.
+
+Next, I learned about ownership. Copying an object that owns a resource can be dangerous because multiple objects may try to release the same resource, causing bugs such as double close or double free.
+
+Finally, I learned move semantics. Instead of copying ownership, ownership can be transferred from one object to another. After the move, the old object no longer owns the resource, ensuring that the resource is released only once.
+
+The main takeaway from today was that a resource should have only one owner, and RAII helps manage resources automatically using constructors and destructors.
