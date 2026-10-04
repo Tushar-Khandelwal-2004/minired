@@ -52,3 +52,38 @@ Next, I learned about ownership. Copying an object that owns a resource can be d
 Finally, I learned move semantics. Instead of copying ownership, ownership can be transferred from one object to another. After the move, the old object no longer owns the resource, ensuring that the resource is released only once.
 
 The main takeaway from today was that a resource should have only one owner, and RAII helps manage resources automatically using constructors and destructors.
+
+After understanding the concepts, I implemented my first real project class: `Fd` (`src/util/fd.h`).
+
+The purpose of this class is to own a Linux file descriptor and automatically close it when the object goes out of scope.
+
+While implementing it, I learned about:
+
+- `#pragma once`
+- `explicit` constructors
+- `static constexpr`
+- Deleting copy constructor and copy assignment operator
+- Move constructor
+- Move assignment operator
+- Default function arguments
+
+I implemented the following functions:
+
+- Default constructor
+- Constructor that takes ownership of a file descriptor
+- Destructor
+- Move constructor
+- Move assignment operator
+- `get()`
+- `valid()`
+- `release()`
+- `reset()`
+
+Copying was disabled to prevent multiple objects from owning the same descriptor.
+
+I then created `learn/day02_fd_test.cpp` to test the class. For the first time, I used Linux system calls such as `open()` and `close()` and learned that the kernel returns a file descriptor (an integer) which is used to access files and other resources.
+
+Using `std::move()`, I transferred ownership of a descriptor from one `Fd` object to another and verified that the original object became invalid after the move.
+
+Finally, I tested the destructor and confirmed that the descriptor was closed exactly once. This proved that the ownership transfer logic was working correctly and that the RAII wrapper was doing its job.
+
