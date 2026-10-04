@@ -10,7 +10,6 @@ int main() {
 
     {
         Fd b = std::move(a);
-
         std::cout
             << "b holds " << b.get()
             << ", a valid: "
@@ -19,4 +18,9 @@ int main() {
     }
 
     std::cout << "after block\n";
+
+    Fd c;
+std::cout << "c before reset: " << c.get() << "\n";
+c.reset(open("/dev/null", O_RDONLY));
+std::cout << "c after reset: " << c.get() << "\n";
 }

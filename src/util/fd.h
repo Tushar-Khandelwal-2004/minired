@@ -24,7 +24,7 @@ public:
         std::cout << "Fd destructor closing " << fd_ << '\n';
         close(fd_);
     }
-}
+    }
     // TODO: delete the copy constructor and the copy assignment
     Fd(const Fd&)=delete;
     Fd& operator=(const Fd&)=delete;
@@ -69,15 +69,10 @@ public:
             return temp;
         }
     // TODO: void reset(int fd = kInvalid)   close the current one, adopt the new one
-    void reset(int fd=kInvalid){
-        if(fd_==fd){
-            return;
-        }
-        if(fd_==kInvalid){
-            return;
-        }
-        close(fd_);
-        fd_=fd;
+    void reset(int fd = kInvalid) {
+        if (fd_ == fd) return;
+        if (fd_ != kInvalid) close(fd_);
+        fd_ = fd;
     }
 private:
     int fd_;
